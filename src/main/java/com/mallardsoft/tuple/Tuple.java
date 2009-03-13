@@ -73,13 +73,12 @@ public class Tuple<First extends Comparable<First>, Rest extends Comparable<Rest
 	}
 
     // Compare two tuples. All elements must be equal.
-    @SuppressWarnings("unchecked")
 	public boolean equals(Object obj) {
         if (obj == null)
             return false;
         if (!(obj instanceof Tuple))
             return false;
-        Tuple<First, Rest> that = (Tuple<First, Rest>) obj;
+        Tuple<?, ?> that = (Tuple<?, ?>) obj;
         return
         	(this.first == null ? that.first == null : this.first.equals(that.first)) &&
         	this.rest.equals(that.rest);

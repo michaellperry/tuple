@@ -1,0 +1,38 @@
+TUPLE
+
+Type-safe tuples in Java.
+
+NOTE
+
+This is a development branch of Java Tuple by Alan Gutierrez. This is not the
+a authoratative source code repository or the origin of the Java Tuple source.
+If you want the latest, greatest Java Tuple source please redirect your web
+browser to http://javatuple.com/ for the work of Michael L Perry.
+
+RESOURCES
+
+    Home: http://javatuple.com/
+    Source: http://javatuple.com/
+    Contact: Michael L Perry (http://adventuresinsoftware.com/blog/)
+
+ABOUT
+
+    Note: http://curlybraces.org/page/TuplePartial.html
+    Note: http://curlybraces.org/page/Tuple.html
+    Contact: alan@blogometer.com
+
+PURPOSE
+
+This development fork was created to explore creating a Maven build for Java
+Tuple so that the library could be published at the Maven central reposititory.
+
+MOTIVATION
+
+Java Tuple is the rarest of beasts, a meaningful Java generics library that does
+not use the @SuppressWarnings("unchecked") directives. I made a study of
+implementing partial comparisons of Java Tuple that were similarily type-safe.
+
+Michael L. Perry was responding to users who needed Tuples that could store
+objects that did not implement Comparable, so this fork was created to explore
+the implementation of comparable Tuples that do not make Comparable a
+requirement of a tuple member type.

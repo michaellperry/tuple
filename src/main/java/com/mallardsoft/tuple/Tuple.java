@@ -46,12 +46,12 @@ package com.mallardsoft.tuple;
  * TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class Tuple<First extends Comparable<First>, Rest extends Comparable<Rest>> implements SeparatedAppender, Comparable<Tuple<First, Rest>> {
+public class Tuple<First, Rest> implements SeparatedAppender {
 
 	private First first;
 	private Rest rest;
 
-	protected Tuple(First first, Rest rest) {
+	public Tuple(First first, Rest rest) {
 		this.first = first;
 		this.rest = rest;
 	}
@@ -68,10 +68,10 @@ public class Tuple<First extends Comparable<First>, Rest extends Comparable<Rest
 		return rest;
 	}
 
-	public <T extends Comparable<T>> Tuple<T, Tuple<First, Rest>> prepend(T m) {
+	public <T> Tuple<T, Tuple<First, Rest>> prepend(T m) {
 		return new Tuple<T, Tuple<First, Rest>>(m, this);
 	}
-
+ 
     // Compare two tuples. All elements must be equal.
 	public boolean equals(Object obj) {
         if (obj == null)
@@ -105,94 +105,84 @@ public class Tuple<First extends Comparable<First>, Rest extends Comparable<Rest
     	buffer.append(separator).append(first);
     	((SeparatedAppender)rest).appendString(buffer, separator);
 	}
-
-	// Order by the most significant element first.
-    // The tuples must agree in size and type.
-	public int compareTo(Tuple<First, Rest> that) {
-        int compare = this.first.compareTo(that.first);
-        if (compare != 0)
-        	return compare;
-        else
-        	return this.rest.compareTo(that.rest);
-    }
-
-    public static <T1 extends Comparable<T1>> Single<T1> from(T1 m1) {
+	
+    public static <T1> Single<T1> from(T1 m1) {
     	return new Single<T1>(m1);
     }
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>> Pair<T1, T2> from(T1 m1, T2 m2) {
+	public static <T1, T2> Pair<T1, T2> from(T1 m1, T2 m2) {
 		return new Pair<T1, T2>(m1, m2);
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>> Triple<T1, T2, T3> from(T1 m1, T2 m2, T3 m3) {
+	public static <T1, T2, T3> Triple<T1, T2, T3> from(T1 m1, T2 m2, T3 m3) {
 		return new Triple<T1, T2, T3>(m1, m2, m3);
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>> Quadruple<T1, T2, T3, T4> from(T1 m1, T2 m2, T3 m3, T4 m4) {
+	public static <T1, T2, T3, T4> Quadruple<T1, T2, T3, T4> from(T1 m1, T2 m2, T3 m3, T4 m4) {
 		return new Quadruple<T1, T2, T3, T4>(m1, m2, m3, m4);
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>> Quintuple<T1, T2, T3, T4, T5> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5) {
+	public static <T1, T2, T3, T4, T5> Quintuple<T1, T2, T3, T4, T5> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5) {
 		return new Quintuple<T1, T2, T3, T4, T5>(m1, m2, m3, m4, m5);
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>> Sextuple<T1, T2, T3, T4, T5, T6> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6) {
+	public static <T1, T2, T3, T4, T5, T6> Sextuple<T1, T2, T3, T4, T5, T6> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6) {
 		return new Sextuple<T1, T2, T3, T4, T5, T6>(m1, m2, m3, m4, m5, m6);
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, T7 extends Comparable<T7>> Septuple<T1, T2, T3, T4, T5, T6, T7> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6, T7 m7) {
+	public static <T1, T2, T3, T4, T5, T6, T7> Septuple<T1, T2, T3, T4, T5, T6, T7> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6, T7 m7) {
 		return new Septuple<T1, T2, T3, T4, T5, T6, T7>(m1, m2, m3, m4, m5, m6, m7);
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, T7 extends Comparable<T7>, T8 extends Comparable<T8>> Octuple<T1, T2, T3, T4, T5, T6, T7, T8> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6, T7 m7, T8 m8) {
+	public static <T1, T2, T3, T4, T5, T6, T7, T8> Octuple<T1, T2, T3, T4, T5, T6, T7, T8> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6, T7 m7, T8 m8) {
 		return new Octuple<T1, T2, T3, T4, T5, T6, T7, T8>(m1, m2, m3, m4, m5, m6, m7, m8);
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, T7 extends Comparable<T7>, T8 extends Comparable<T8>, T9 extends Comparable<T9>> Nonuple<T1, T2, T3, T4, T5, T6, T7, T8, T9> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6, T7 m7, T8 m8, T9 m9) {
+	public static <T1, T2, T3, T4, T5, T6, T7, T8, T9> Nonuple<T1, T2, T3, T4, T5, T6, T7, T8, T9> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6, T7 m7, T8 m8, T9 m9) {
 		return new Nonuple<T1, T2, T3, T4, T5, T6, T7, T8, T9>(m1, m2, m3, m4, m5, m6, m7, m8, m9);
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, T7 extends Comparable<T7>, T8 extends Comparable<T8>, T9 extends Comparable<T9>, T10 extends Comparable<T10>> Decuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6, T7 m7, T8 m8, T9 m9, T10 m10) {
+	public static <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Decuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> from(T1 m1, T2 m2, T3 m3, T4 m4, T5 m5, T6 m6, T7 m7, T8 m8, T9 m9, T10 m10) {
 		return new Decuple<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10);
 	}
-
-	public static <T1 extends Comparable<T1>, Rest extends Comparable<Rest>> T1 get1(Tuple<T1, Rest> tuple) {
+	
+	public static <T1, Rest> T1 get1(Tuple<T1, Rest> tuple) {
 		return tuple.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, Rest extends Comparable<Rest>> T2 get2(Tuple<T1, Tuple<T2, Rest>> tuple) {
+	public static <T1, T2, Rest> T2 get2(Tuple<T1, Tuple<T2, Rest>> tuple) {
 		return tuple.rest.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, Rest extends Comparable<Rest>> T3 get3(Tuple<T1, Tuple<T2, Tuple<T3, Rest>>> tuple) {
+	public static <T1, T2, T3, Rest> T3 get3(Tuple<T1, Tuple<T2, Tuple<T3, Rest>>> tuple) {
 		return tuple.rest.rest.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, Rest extends Comparable<Rest>> T4 get4(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Rest>>>> tuple) {
+	public static <T1, T2, T3, T4, Rest> T4 get4(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Rest>>>> tuple) {
 		return tuple.rest.rest.rest.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, Rest extends Comparable<Rest>> T5 get5(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Rest>>>>> tuple) {
+	public static <T1, T2, T3, T4, T5, Rest> T5 get5(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Rest>>>>> tuple) {
 		return tuple.rest.rest.rest.rest.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, Rest extends Comparable<Rest>> T6 get6(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Rest>>>>>> tuple) {
+	public static <T1, T2, T3, T4, T5, T6, Rest> T6 get6(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Rest>>>>>> tuple) {
 		return tuple.rest.rest.rest.rest.rest.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, T7 extends Comparable<T7>, Rest extends Comparable<Rest>> T7 get7(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Tuple<T7, Rest>>>>>>> tuple) {
+	public static <T1, T2, T3, T4, T5, T6, T7, Rest> T7 get7(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Tuple<T7, Rest>>>>>>> tuple) {
 		return tuple.rest.rest.rest.rest.rest.rest.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, T7 extends Comparable<T7>, T8 extends Comparable<T8>, Rest extends Comparable<Rest>> T8 get8(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Tuple<T7, Tuple<T8, Rest>>>>>>>> tuple) {
+	public static <T1, T2, T3, T4, T5, T6, T7, T8, Rest> T8 get8(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Tuple<T7, Tuple<T8, Rest>>>>>>>> tuple) {
 		return tuple.rest.rest.rest.rest.rest.rest.rest.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, T7 extends Comparable<T7>, T8 extends Comparable<T8>, T9 extends Comparable<T9>, Rest extends Comparable<Rest>> T9 get9(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Tuple<T7, Tuple<T8, Tuple<T9, Rest>>>>>>>>> tuple) {
+	public static <T1, T2, T3, T4, T5, T6, T7, T8, T9, Rest> T9 get9(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Tuple<T7, Tuple<T8, Tuple<T9, Rest>>>>>>>>> tuple) {
 		return tuple.rest.rest.rest.rest.rest.rest.rest.rest.first;
 	}
 
-	public static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>, T4 extends Comparable<T4>, T5 extends Comparable<T5>, T6 extends Comparable<T6>, T7 extends Comparable<T7>, T8 extends Comparable<T8>, T9 extends Comparable<T9>, T10 extends Comparable<T10>, Rest extends Comparable<Rest>> T10 get10(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Tuple<T7, Tuple<T8, Tuple<T9, Tuple<T10, Rest>>>>>>>>>> tuple) {
+	public static <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Rest> T10 get10(Tuple<T1, Tuple<T2, Tuple<T3, Tuple<T4, Tuple<T5, Tuple<T6, Tuple<T7, Tuple<T8, Tuple<T9, Tuple<T10, Rest>>>>>>>>>> tuple) {
 		return tuple.rest.rest.rest.rest.rest.rest.rest.rest.rest.first;
 	}
 

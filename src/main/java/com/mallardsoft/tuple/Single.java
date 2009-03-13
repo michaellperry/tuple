@@ -24,7 +24,7 @@ package com.mallardsoft.tuple;
  * TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class Single<T1 extends Comparable<T1>> extends Tuple<T1, End> {
+public class Single<T1> extends Tuple<T1, End> {
 	
 	public Single(T1 m1) {
 		super(m1, End.getInstance());

@@ -4,10 +4,11 @@ Type-safe tuples in Java.
 
 NOTE
 
-This is a development branch of Java Tuple by Alan Gutierrez. This is not the
-a authoratative source code repository or the origin of the Java Tuple source.
-If you want the latest, greatest Java Tuple source please redirect your web
-browser to http://javatuple.com/ for the work of Michael L Perry.
+This is a development branch of the Java Tuple by Michael L. Perry for the
+hacking pleasure of Alan Gutierrez. This is not the a authoratative source code
+repository or the origin of the Java Tuple source.  If you want the latest,
+greatest Java Tuple source please redirect your web browser to
+http://javatuple.com/ for the work of Michael L Perry.
 
 RESOURCES
 
